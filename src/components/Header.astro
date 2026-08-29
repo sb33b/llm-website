@@ -1,0 +1,165 @@
+---
+import Menu from './icons/Menu.astro';
+import Close from './icons/Close.astro';
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about.html', label: 'About' },
+  { href: '/partner-with-us.html', label: 'Partner With Us' },
+  { href: '/download.html', label: 'Download App' },
+  { href: '/contact.html', label: 'Contact' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="/" class="site-header__brand" aria-label="Last Last Mile — home">
+      <img src="/img/full-logo.svg" alt="Last Last Mile" class="site-header__logo" />
+    </a>
+
+    <nav class="site-header__nav" id="site-nav" aria-label="Primary">
+      <ul>
+        {navLinks.map((link) => (
+          <li>
+            <a href={link.href} aria-current={currentPath === link.href ? 'page' : undefined}>{link.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <a href="/download.html" class="btn btn--primary site-header__cta">Download App</a>
+
+    <button type="button" class="site-header__toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav">
+      <Menu class="icon-open" />
+      <Close class="icon-close" />
+      <span class="visually-hidden">Toggle menu</span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(250, 249, 247, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .site-header__inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 0.9rem;
+  }
+
+  .site-header__logo {
+    height: 26px;
+    width: auto;
+  }
+
+  .site-header__nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.75rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .site-header__nav a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--color-text);
+    padding-block: 0.25rem;
+    border-bottom: 2px solid transparent;
+  }
+
+  .site-header__nav a:hover,
+  .site-header__nav a[aria-current='page'] {
+    border-bottom-color: var(--color-gold);
+  }
+
+  .site-header__cta {
+    padding: 0.6rem 1.4rem;
+    font-size: 0.9rem;
+  }
+
+  .site-header__toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 0.4rem;
+    cursor: pointer;
+    color: var(--color-charcoal);
+  }
+
+  .site-header__toggle .icon-close {
+    display: none;
+  }
+
+  .site-header__toggle[aria-expanded='true'] .icon-open {
+    display: none;
+  }
+
+  .site-header__toggle[aria-expanded='true'] .icon-close {
+    display: block;
+  }
+
+  @media (max-width: 860px) {
+    .site-header__cta {
+      display: none;
+    }
+
+    .site-header__toggle {
+      display: block;
+    }
+
+    .site-header__nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.25s ease;
+    }
+
+    .site-header__nav.is-open {
+      max-height: 400px;
+    }
+
+    .site-header__nav ul {
+      flex-direction: column;
+      gap: 0;
+      padding: 0.5rem 1.5rem 1.5rem;
+    }
+
+    .site-header__nav li {
+      border-top: 1px solid var(--color-border);
+    }
+
+    .site-header__nav a {
+      display: block;
+      padding-block: 0.85rem;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const nav = document.getElementById('site-nav');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = nav?.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(Boolean(isOpen)));
+  });
+</script>

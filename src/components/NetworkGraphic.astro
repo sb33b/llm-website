@@ -1,0 +1,54 @@
+---
+// Original abstract graphic — dots and connecting lines standing in for a
+// hub-and-route network. Not a literal map. Built from scratch for this
+// site; not sourced from any stock library.
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+<svg viewBox="0 0 640 480" fill="none" class={className} role="presentation" aria-hidden="true">
+  <g stroke="#DCD8D0" stroke-width="2">
+    <path d="M90 380 L220 300" />
+    <path d="M220 300 L340 340" />
+    <path d="M340 340 L470 260" />
+    <path d="M470 260 L560 120" />
+    <path d="M220 300 L180 150" />
+    <path d="M180 150 L340 100" />
+    <path d="M340 100 L470 260" />
+    <path d="M180 150 L90 380" />
+  </g>
+
+  <path
+    d="M90 380 L220 300 L180 150 L340 100"
+    stroke="#FBB807"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-dasharray="6 12"
+    class="network-graphic__route"
+  />
+
+  <circle cx="90" cy="380" r="8" fill="#2E3235" />
+  <circle cx="220" cy="300" r="6" fill="#2E3235" />
+  <circle cx="340" cy="340" r="6" fill="#2E3235" />
+  <circle cx="470" cy="260" r="9" fill="#2E3235" />
+  <circle cx="560" cy="120" r="6" fill="#2E3235" />
+  <circle cx="340" cy="100" r="6" fill="#2E3235" />
+  <circle cx="180" cy="150" r="11" fill="#FBB807" stroke="#2E3235" stroke-width="2" />
+</svg>
+
+<style>
+  .network-graphic__route {
+    animation: network-graphic-dash 3.4s linear infinite;
+  }
+  @keyframes network-graphic-dash {
+    to {
+      stroke-dashoffset: -180;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .network-graphic__route {
+      animation: none;
+    }
+  }
+</style>

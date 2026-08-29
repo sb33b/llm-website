@@ -1,0 +1,32 @@
+# Last Last Mile — cPanel/Apache config
+# Copied as-is into dist/.htaccess by the Astro build (public/ files are
+# copied verbatim). See README.md for the full deploy flow.
+
+# --- APK download shortlink -------------------------------------------
+# /download always 302-redirects to wherever the backend's public storage
+# bucket currently serves the latest signed APK build. This keeps the
+# public-facing link (used in nav, hero CTAs, and the /download.html page)
+# permanent even if the storage URL ever changes — update the target below,
+# not every page that links to it.
+#
+# Anchored so it matches ONLY the bare "/download" route, not "/download.html"
+# (the content page) — this is why astro.config.mjs sets build.format: 'file'.
+RedirectMatch 302 ^/download/?$ https://clwqmnkseogvymidxlwz.supabase.co/storage/v1/object/public/app-releases/releases/app-release.apk
+
+# --- 404 -----------------------------------------------------------------
+ErrorDocument 404 /404.html
+
+# --- Force HTTPS -----------------------------------------------------------
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# --- Basic caching for static assets ---------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType text/css "access plus 1 week"
+  ExpiresByType application/javascript "access plus 1 week"
+</IfModule>

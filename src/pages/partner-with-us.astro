@@ -1,0 +1,206 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import Wallet from '../components/icons/Wallet.astro';
+import ShieldCheck from '../components/icons/ShieldCheck.astro';
+import Clock from '../components/icons/Clock.astro';
+import MapPin from '../components/icons/MapPin.astro';
+import CheckCircle from '../components/icons/CheckCircle.astro';
+import { contactInfo } from '../data/contact-info';
+
+const benefits = [
+  {
+    icon: Wallet,
+    title: 'Transparent pay',
+    body: 'Earn per delivery and per linehaul trip, itemized and logged against your account — no guessing what you’re owed.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'A record you can check',
+    body: 'Every attempt, transfer, and payout is logged. Your work history is a clear record, not word of mouth.',
+  },
+  {
+    icon: Clock,
+    title: 'Fits your schedule',
+    body: 'Pasabay trips piggyback on runs you’re already making; special trips when the volume calls for it.',
+  },
+  {
+    icon: MapPin,
+    title: 'Routes you already know',
+    body: 'You deliver in the barangays your TODA already covers — no unfamiliar territory.',
+  },
+];
+
+const eligibility = [
+  'Active membership with a TODA (or willingness to join one operating in your area)',
+  'Valid driver’s license',
+  'A tricycle in safe, working condition',
+  'A smartphone to log deliveries and attempts through the app',
+];
+
+const mailSubject = encodeURIComponent('Interested in partnering — TODA / Courier');
+const mailBody = encodeURIComponent(
+  'Hi Last Last Mile team,\n\nI’m interested in partnering as a courier / TODA. Here are my details:\n\nName:\nTODA (or barangay, if not yet affiliated):\nContact number:\n\n'
+);
+const mailtoHref = `mailto:${contactInfo.email.partners}?subject=${mailSubject}&body=${mailBody}`;
+---
+
+<BaseLayout
+  title="Partner With Us"
+  description="Last Last Mile partners with TODA associations and individual tricycle couriers across CALABARZON — transparent pay, a logged record of every delivery, and routes you already know."
+  path="/partner-with-us.html"
+>
+  <section class="section partner-hero">
+    <div class="container partner-hero__inner">
+      <span class="eyebrow">For TODAs & Couriers</span>
+      <h1>Turn your tricycle into a delivery route.</h1>
+      <p class="text-muted partner-hero__lead">
+        Last Last Mile works directly with TODA associations and individual tricycle couriers to carry
+        parcels the last stretch — into barangays a standard courier fleet can't reach. If your TODA
+        already rides these roads, you're already qualified to move parcels on them too.
+      </p>
+      <Button href={mailtoHref} variant="primary">Email us to get started</Button>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="container">
+      <div class="section-heading">
+        <span class="eyebrow">Why Partner With Us</span>
+        <h2>What you get as a partner</h2>
+      </div>
+      <div class="grid grid--4">
+        {benefits.map((item) => {
+          const Icon = item.icon;
+          return (
+            <div class="feature-card">
+              <div class="feature-card__icon"><Icon size={24} /></div>
+              <h3>{item.title}</h3>
+              <p class="text-muted">{item.body}</p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container eligibility">
+      <div>
+        <span class="eyebrow">Getting Started</span>
+        <h2>What you'll need</h2>
+        <p class="text-muted">
+          We keep the bar simple — if your TODA is already active in your area, you're most of the way
+          there.
+        </p>
+      </div>
+      <ul class="eligibility__list">
+        {eligibility.map((item) => (
+          <li>
+            <CheckCircle size={20} />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container partner-cta">
+      <h2>Ready to get started?</h2>
+      <p class="text-muted partner-cta__lead">
+        Online registration is on the way. For now, email us your name, your TODA (or barangay, if
+        you're not yet affiliated with one), and a contact number — our team will reach out to walk you
+        through the next steps.
+      </p>
+      <Button href={mailtoHref} variant="primary">Email {contactInfo.email.partners}</Button>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .partner-hero__inner {
+    max-width: 70ch;
+  }
+
+  .partner-hero__lead {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+
+  .section-heading {
+    max-width: 60ch;
+    margin-bottom: 2.5rem;
+  }
+
+  .feature-card {
+    padding: 1.5rem;
+  }
+
+  .feature-card__icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    background: rgba(251, 184, 7, 0.14);
+    color: var(--color-gold-dark);
+    margin-bottom: 1rem;
+  }
+
+  .feature-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .feature-card p {
+    font-size: 0.95rem;
+    margin-bottom: 0;
+  }
+
+  .eligibility {
+    display: grid;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  @media (min-width: 860px) {
+    .eligibility {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .eligibility__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .eligibility__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .eligibility__list :global(svg) {
+    color: var(--color-success);
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .partner-cta {
+    max-width: 60ch;
+  }
+
+  .partner-cta__lead {
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+  }
+</style>

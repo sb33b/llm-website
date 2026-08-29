@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+---
+
+<BaseLayout
+  title="Page Not Found"
+  description="This page doesn't exist."
+  path="/404.html"
+>
+  <section class="section not-found">
+    <div class="container not-found__inner">
+      <img src="/img/applogo.svg" alt="" class="not-found__mark" />
+      <span class="eyebrow">404</span>
+      <h1>This route doesn't go anywhere.</h1>
+      <p class="text-muted">
+        The page you're looking for may have moved, or the link may be out of date.
+      </p>
+      <Button href="/" variant="primary">Back to home</Button>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .not-found__inner {
+    text-align: center;
+    max-width: 50ch;
+    margin-inline: auto;
+  }
+
+  .not-found__mark {
+    width: 64px;
+    height: 64px;
+    margin-inline: auto;
+    margin-bottom: 1.5rem;
+  }
+</style>

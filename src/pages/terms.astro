@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { contactInfo } from '../data/contact-info';
+---
+
+<BaseLayout
+  title="Terms of Use"
+  description="Terms of use for the Last Last Mile website."
+  path="/terms.html"
+>
+  <section class="section legal">
+    <div class="container legal__inner">
+      <span class="eyebrow">Terms of Use</span>
+      <h1>Terms of Use</h1>
+      <p class="text-muted mono">Last updated: August 29, 2026</p>
+
+      <div class="card legal__notice">
+        <p>
+          <strong>This is a starting draft, not a finished policy.</strong> It hasn't had a formal
+          legal review. Replace this notice once that review is complete.
+        </p>
+      </div>
+
+      <h2>Using this website</h2>
+      <p>
+        This website is provided to share information about Last Last Mile, our partnership model,
+        and how to reach us — including for prospective TODA and courier partners and express company
+        clients. Content on this site is provided as-is and may change without notice as our network
+        and services evolve.
+      </p>
+
+      <h2>The Last Last Mile app</h2>
+      <p>
+        Use of the Last Last Mile app itself, including accounts, roles, and operational data, is
+        governed separately by the terms provided at account setup, not by this website's terms.
+      </p>
+
+      <h2>Intellectual property</h2>
+      <p>
+        The Last Last Mile name, logo, and branding are the property of {contactInfo.legalName}. Content
+        on this site may not be reproduced for commercial purposes without permission.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about these terms can be sent to <a href={`mailto:${contactInfo.email.general}`}>{contactInfo.email.general}</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal__inner {
+    max-width: 68ch;
+  }
+
+  .legal__notice {
+    background: rgba(251, 184, 7, 0.1);
+    border-color: rgba(251, 184, 7, 0.35);
+    margin-block: 1.5rem 2rem;
+  }
+
+  .legal__notice p {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  .legal h2 {
+    margin-top: 2rem;
+  }
+</style>

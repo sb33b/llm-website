@@ -1,0 +1,144 @@
+---
+import { contactInfo } from '../data/contact-info';
+import Mail from './icons/Mail.astro';
+import Phone from './icons/Phone.astro';
+import MapPin from './icons/MapPin.astro';
+
+const year = new Date().getFullYear();
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about.html', label: 'About' },
+  { href: '/partner-with-us.html', label: 'Partner With Us' },
+  { href: '/download.html', label: 'Download App' },
+  { href: '/contact.html', label: 'Contact' },
+];
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <img src="/img/full-logo.svg" alt="Last Last Mile" class="site-footer__logo" />
+      <p class="text-muted">{contactInfo.tagline}</p>
+    </div>
+
+    <nav aria-label="Footer">
+      <h4>Site</h4>
+      <ul class="site-footer__list">
+        {navLinks.map((link) => (
+          <li><a href={link.href}>{link.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div>
+      <h4>Legal</h4>
+      <ul class="site-footer__list">
+        <li><a href="/privacy.html">Privacy Policy</a></li>
+        <li><a href="/terms.html">Terms of Use</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Contact</h4>
+      <ul class="site-footer__list site-footer__contact">
+        <li>
+          <a href={`mailto:${contactInfo.email.general}`}>
+            <Mail size={16} /> <span>{contactInfo.email.general}</span>
+          </a>
+        </li>
+        <li>
+          <a href={contactInfo.phone.href}>
+            <Phone size={16} /> <span>{contactInfo.phone.display}</span>
+          </a>
+        </li>
+        <li>
+          <MapPin size={16} />
+          <span>{contactInfo.address.line1}, {contactInfo.address.line2}, {contactInfo.address.line3}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container site-footer__bottom">
+    <p>&copy; {year} {contactInfo.legalName}. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-charcoal);
+    color: var(--color-text-on-dark);
+    padding-block: 3.5rem 1.5rem;
+  }
+
+  .site-footer__grid {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 720px) {
+    .site-footer__grid {
+      grid-template-columns: 1.4fr 1fr 1fr 1.4fr;
+    }
+  }
+
+  .site-footer__logo {
+    height: 22px;
+    filter: brightness(0) invert(1);
+    margin-bottom: 0.75rem;
+  }
+
+  .site-footer h4 {
+    font-family: var(--font-heading);
+    color: var(--color-white);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 1rem;
+  }
+
+  .site-footer__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .site-footer__list a {
+    text-decoration: none;
+    color: var(--color-text-on-dark-muted);
+  }
+
+  .site-footer__list a:hover {
+    color: var(--color-gold);
+  }
+
+  .site-footer__contact li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.55rem;
+    color: var(--color-text-on-dark-muted);
+    line-height: 1.4;
+  }
+
+  .site-footer__contact li :global(svg) {
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+
+  .site-footer__bottom {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 0.85rem;
+    color: var(--color-text-on-dark-muted);
+  }
+
+  .site-footer__bottom p {
+    margin: 0;
+  }
+</style>

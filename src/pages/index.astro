@@ -1,0 +1,171 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import NetworkGraphic from '../components/NetworkGraphic.astro';
+import StatsStrip from '../components/StatsStrip.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import ShieldCheck from '../components/icons/ShieldCheck.astro';
+import Clock from '../components/icons/Clock.astro';
+import Wallet from '../components/icons/Wallet.astro';
+import MapPin from '../components/icons/MapPin.astro';
+
+const whyPartner = [
+  {
+    icon: ShieldCheck,
+    title: 'Status you can trust',
+    body: "Every parcel's status is derived from real events, not a manual checkbox. If it says delivered, a courier logged proof on the spot.",
+  },
+  {
+    icon: Clock,
+    title: 'SLA-monitored, every stage',
+    body: 'Manifests, linehauls, and deliveries are watched against service thresholds, so delays surface before they become disputes.',
+  },
+  {
+    icon: Wallet,
+    title: 'Transparent COD handling',
+    body: 'Cash-on-delivery is collected and remitted through GCash, Palawan Express, or cash — confirmed in two steps before it counts as settled.',
+  },
+  {
+    icon: MapPin,
+    title: 'Reach past the end of the road',
+    body: 'Our TODA network gets parcels into barangays a standard courier fleet would otherwise have to write off.',
+  },
+];
+---
+
+<BaseLayout
+  title="Last Last Mile"
+  description="Last Last Mile partners with express delivery companies and local TODAs to deliver parcels into areas standard courier networks can't reach."
+  path="/"
+>
+  <section class="section hero">
+    <div class="container hero__grid">
+      <div class="hero__copy">
+        <span class="eyebrow">B2B Last-Mile Logistics</span>
+        <h1>Delivering past the end of the road.</h1>
+        <p class="hero__lead text-muted">
+          Last Last Mile partners with express delivery companies and local tricycle associations
+          (TODAs) to get parcels into barangays a standard courier network can't reach — with every
+          step logged, verified, and traceable from manifest to doorstep.
+        </p>
+        <div class="cluster">
+          <Button href="/partner-with-us.html" variant="primary">Partner With Us</Button>
+          <Button href="/download.html" variant="secondary">Download the App</Button>
+        </div>
+      </div>
+      <div class="hero__visual">
+        <NetworkGraphic />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight section--surface">
+    <div class="container">
+      <StatsStrip />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="eyebrow">How it works</span>
+        <h2>From manifest to doorstep, every step is logged.</h2>
+      </div>
+      <HowItWorks />
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="container">
+      <div class="section-heading">
+        <span class="eyebrow">For Express Companies</span>
+        <h2>Why partner with us</h2>
+      </div>
+      <div class="grid grid--4">
+        {whyPartner.map((item) => {
+          const Icon = item.icon;
+          return (
+            <div class="feature-card">
+              <div class="feature-card__icon"><Icon size={24} /></div>
+              <h3>{item.title}</h3>
+              <p class="text-muted">{item.body}</p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark toda-cta">
+    <div class="container toda-cta__grid">
+      <div>
+        <span class="eyebrow">For TODAs & Couriers</span>
+        <h2>Turn your tricycle into a delivery route.</h2>
+        <p class="text-muted">
+          We work directly with TODA associations and individual couriers across CALABARZON — steady
+          per-delivery and per-trip pay, a transparent payout ledger, and routes that already run
+          through your barangay.
+        </p>
+        <Button href="/partner-with-us.html" variant="primary">Learn more</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero__grid {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .hero__grid {
+      grid-template-columns: 1.1fr 1fr;
+    }
+  }
+
+  .hero__lead {
+    font-size: 1.1rem;
+    max-width: 46ch;
+  }
+
+  .hero__visual {
+    max-width: 480px;
+    margin-inline: auto;
+  }
+
+  .section-heading {
+    max-width: 60ch;
+    margin-bottom: 2.5rem;
+  }
+
+  .feature-card {
+    padding: 1.5rem;
+  }
+
+  .feature-card__icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    background: rgba(46, 50, 53, 0.06);
+    color: var(--color-charcoal);
+    margin-bottom: 1rem;
+  }
+
+  .feature-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .feature-card p {
+    font-size: 0.95rem;
+    margin-bottom: 0;
+  }
+
+  .toda-cta__grid > div {
+    max-width: 60ch;
+  }
+</style>

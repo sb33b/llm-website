@@ -1,0 +1,37 @@
+---
+const stats = [
+  { value: '5', label: 'Provinces across CALABARZON' },
+  { value: '57', label: 'Municipalities within reach' },
+  { value: '25', label: 'Nodes — hubs, terminals & drop points' },
+  { value: '100%', label: 'Status traced from logged events' },
+];
+---
+
+<div class="stats-strip grid grid--4">
+  {stats.map((s) => (
+    <div class="stats-strip__item">
+      <span class="stats-strip__value">{s.value}</span>
+      <span class="stats-strip__label text-muted">{s.label}</span>
+    </div>
+  ))}
+</div>
+
+<style>
+  .stats-strip__item {
+    text-align: center;
+  }
+
+  .stats-strip__value {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: clamp(2rem, 3vw, 2.75rem);
+    color: var(--color-gold-dark);
+  }
+
+  .stats-strip__label {
+    display: block;
+    font-size: 0.9rem;
+    margin-top: 0.35rem;
+  }
+</style>

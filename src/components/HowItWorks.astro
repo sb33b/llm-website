@@ -1,0 +1,90 @@
+---
+import Parcel from './icons/Parcel.astro';
+import Route from './icons/Route.astro';
+import MapPin from './icons/MapPin.astro';
+import Tricycle from './icons/Tricycle.astro';
+
+const steps = [
+  {
+    icon: Parcel,
+    title: 'Manifest in',
+    body: 'Your express company hands off a manifest — one parcel or a full batch. Every piece is logged the moment it enters the network.',
+  },
+  {
+    icon: Route,
+    title: 'Linehaul out',
+    body: 'Parcels move between nodes on scheduled runs where it makes sense, or on a dedicated trip when volume calls for it.',
+  },
+  {
+    icon: MapPin,
+    title: 'Node handoff',
+    body: 'Parcels rest at a local hub or terminal until a courier is ready for the final leg — every handoff logged, not assumed.',
+  },
+  {
+    icon: Tricycle,
+    title: 'Courier delivery',
+    body: 'A TODA-affiliated courier rides the last stretch by tricycle, into barangays larger couriers can’t reach — delivery confirmed on the spot.',
+  },
+];
+---
+
+<ol class="how-it-works grid grid--4">
+  {steps.map((step, i) => {
+    const Icon = step.icon;
+    return (
+      <li class="how-it-works__step">
+        <span class="how-it-works__index">{String(i + 1).padStart(2, '0')}</span>
+        <div class="how-it-works__icon"><Icon size={26} /></div>
+        <h3>{step.title}</h3>
+        <p class="text-muted">{step.body}</p>
+      </li>
+    );
+  })}
+</ol>
+
+<style>
+  .how-it-works {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .how-it-works__step {
+    position: relative;
+    padding: 1.75rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+
+  .how-it-works__step h3 {
+    font-size: 1.15rem;
+  }
+
+  .how-it-works__step p {
+    margin-bottom: 0;
+    font-size: 0.95rem;
+  }
+
+  .how-it-works__icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    background: rgba(251, 184, 7, 0.14);
+    color: var(--color-gold-dark);
+    margin-bottom: 1rem;
+  }
+
+  .how-it-works__index {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--color-border);
+    font-size: 1.1rem;
+  }
+</style>

@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { contactInfo } from '../data/contact-info';
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="How Last Last Mile handles the information collected through this website and the Last Last Mile app."
+  path="/privacy.html"
+>
+  <section class="section legal">
+    <div class="container legal__inner">
+      <span class="eyebrow">Privacy Policy</span>
+      <h1>Privacy Policy</h1>
+      <p class="text-muted mono">Last updated: August 29, 2026</p>
+
+      <div class="card legal__notice">
+        <p>
+          <strong>This is a starting draft, not a finished policy.</strong> It's written to be
+          accurate about what this website currently does, but it hasn't had a formal legal review
+          and doesn't yet cover the Last Last Mile app's data handling in detail. Replace this notice
+          once that review is complete.
+        </p>
+      </div>
+
+      <h2>What this site collects</h2>
+      <p>
+        This website does not run any tracking scripts, analytics, or cookies of its own, and it has
+        no forms that submit data anywhere. The only way to send us information from this site is by
+        emailing us directly — for example, using the "Email us to get started" link on our Partner
+        page, which opens your own email app addressed to us. Whatever you choose to include in that
+        email (such as your name, TODA affiliation, or contact number) is sent the same way any email
+        is: to our inbox, under our control, used only to follow up with you about partnering.
+      </p>
+
+      <h2>The Last Last Mile app</h2>
+      <p>
+        The Last Last Mile mobile app, used by our coordinators, dispatchers, couriers, linehaulers,
+        node owners, and express company representatives, handles operational data — including
+        parcel, delivery, and payout records — under its own account system. A full description of
+        that handling will be published here as this policy matures.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about this policy can be sent to <a href={`mailto:${contactInfo.email.general}`}>{contactInfo.email.general}</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal__inner {
+    max-width: 68ch;
+  }
+
+  .legal__notice {
+    background: rgba(251, 184, 7, 0.1);
+    border-color: rgba(251, 184, 7, 0.35);
+    margin-block: 1.5rem 2rem;
+  }
+
+  .legal__notice p {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  .legal h2 {
+    margin-top: 2rem;
+  }
+</style>

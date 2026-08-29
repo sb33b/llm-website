@@ -1,0 +1,182 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ShieldCheck from '../components/icons/ShieldCheck.astro';
+import MapPin from '../components/icons/MapPin.astro';
+import Tricycle from '../components/icons/Tricycle.astro';
+import Route from '../components/icons/Route.astro';
+import Clock from '../components/icons/Clock.astro';
+
+const roles = [
+  { icon: ShieldCheck, title: 'Coordinators', body: 'Accept manifests from express partners and set linehauls in motion.' },
+  { icon: MapPin, title: 'Dispatchers', body: 'Run a node — receiving linehauls in, releasing parcels to couriers.' },
+  { icon: Tricycle, title: 'Couriers', body: 'Ride the last stretch by tricycle and confirm delivery on the spot.' },
+  { icon: Route, title: 'Linehaulers', body: 'Move parcels between nodes, on scheduled or dedicated trips.' },
+  { icon: MapPin, title: 'Node owners', body: 'Host the physical hubs, terminals, and drop points parcels pass through.' },
+  { icon: Clock, title: 'Express reps', body: 'See their company’s shipments moving through the network in real time.' },
+];
+
+const provinces = ['Cavite', 'Batangas', 'Laguna', 'Rizal', 'Quezon'];
+---
+
+<BaseLayout
+  title="About"
+  description="Last Last Mile closes the gap between express couriers and the barangays a standard network can't reach — through a TODA partnership model and a system where status is always derived, never assumed."
+  path="/about.html"
+>
+  <section class="section">
+    <div class="container about-hero">
+      <span class="eyebrow">About Us</span>
+      <h1>Closing the last last mile.</h1>
+      <p class="text-muted about-hero__lead">
+        Express couriers can get a parcel most of the way — into a city, a hub, a terminal. What
+        happens after that, into a barangay with no formal address or a road a delivery van can't
+        take, is the gap we exist to close. We partner with express delivery companies and local
+        tricycle drivers' associations (TODAs) to carry parcels the rest of the way.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="container philosophy">
+      <div class="philosophy__copy">
+        <span class="eyebrow">Our Philosophy</span>
+        <h2>The app is the source of truth — not the humans.</h2>
+        <p class="text-muted">
+          Coordinators, dispatchers, couriers, linehaulers, node owners, and express reps all exist to
+          physically execute a task: load a linehaul, ride a route, verify a parcel is really there.
+          What they don't do is decide a parcel's status by hand. Every status you see is derived from
+          a logged event — a scan, a photo, a confirmed handoff — so the record reflects what actually
+          happened, not what someone remembered to update.
+        </p>
+      </div>
+      <div class="philosophy__card card">
+        <p class="mono philosophy__quote">"If it says delivered, it's because a courier logged proof — not because someone marked a box."</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="eyebrow">The Network</span>
+        <h2>Six roles, one shared record.</h2>
+      </div>
+      <div class="grid grid--3">
+        {roles.map((role) => {
+          const Icon = role.icon;
+          return (
+            <div class="feature-card">
+              <div class="feature-card__icon"><Icon size={22} /></div>
+              <h3>{role.title}</h3>
+              <p class="text-muted">{role.body}</p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container coverage">
+      <span class="eyebrow">Where We Operate</span>
+      <h2>CALABARZON, and growing.</h2>
+      <p class="text-muted coverage__lead">
+        Today our network covers all five CALABARZON provinces, reaching dozens of municipalities
+        through a mix of hubs, terminals, and courier drop points.
+      </p>
+      <ul class="coverage__list">
+        {provinces.map((province) => (
+          <li>{province}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-hero {
+    max-width: 70ch;
+  }
+
+  .about-hero__lead {
+    font-size: 1.1rem;
+  }
+
+  .philosophy {
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: 860px) {
+    .philosophy {
+      grid-template-columns: 1.2fr 1fr;
+    }
+  }
+
+  .philosophy__card {
+    background: var(--color-charcoal);
+    color: var(--color-white);
+  }
+
+  .philosophy__quote {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .section-heading {
+    max-width: 60ch;
+    margin-bottom: 2.5rem;
+  }
+
+  .feature-card {
+    padding: 1.5rem;
+  }
+
+  .feature-card__icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    background: rgba(251, 184, 7, 0.14);
+    color: var(--color-gold-dark);
+    margin-bottom: 1rem;
+  }
+
+  .feature-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .feature-card p {
+    font-size: 0.95rem;
+    margin-bottom: 0;
+  }
+
+  .coverage {
+    max-width: 60ch;
+  }
+
+  .coverage__lead {
+    font-size: 1.05rem;
+  }
+
+  .coverage__list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0;
+    margin-top: 1.5rem;
+  }
+
+  .coverage__list li {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    padding: 0.6rem 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-pill);
+  }
+</style>
