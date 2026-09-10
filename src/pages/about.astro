@@ -1,26 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ShieldCheck from '../components/icons/ShieldCheck.astro';
-import MapPin from '../components/icons/MapPin.astro';
-import Tricycle from '../components/icons/Tricycle.astro';
-import Route from '../components/icons/Route.astro';
-import Clock from '../components/icons/Clock.astro';
-
-const roles = [
-  { icon: ShieldCheck, title: 'Coordinators', body: 'Accept manifests from express partners and set linehauls in motion.' },
-  { icon: MapPin, title: 'Dispatchers', body: 'Run a node — receiving linehauls in, releasing parcels to couriers.' },
-  { icon: Tricycle, title: 'Couriers', body: 'Ride the last stretch by tricycle and confirm delivery on the spot.' },
-  { icon: Route, title: 'Linehaulers', body: 'Move parcels between nodes, on scheduled or dedicated trips.' },
-  { icon: MapPin, title: 'Node owners', body: 'Host the physical hubs, terminals, and drop points parcels pass through.' },
-  { icon: Clock, title: 'Express reps', body: 'See their company’s shipments moving through the network in real time.' },
-];
 
 const provinces = ['Cavite', 'Batangas', 'Laguna', 'Rizal', 'Quezon'];
 ---
 
 <BaseLayout
   title="About"
-  description="Last Last Mile closes the gap between express couriers and the barangays a standard network can't reach — through a TODA partnership model and a system where status is always derived, never assumed."
+  description="Last Last Mile closes the gap between express couriers and the barangays a standard network can't reach — with live visibility and a TODA partnership model, from manifest to doorstep."
   path="/about.html"
 >
   <section class="section">
@@ -40,39 +26,28 @@ const provinces = ['Cavite', 'Batangas', 'Laguna', 'Rizal', 'Quezon'];
     <div class="container philosophy">
       <div class="philosophy__copy">
         <span class="eyebrow">Our Philosophy</span>
-        <h2>The app is the source of truth — not the humans.</h2>
+        <h2>Live visibility, not guesswork.</h2>
         <p class="text-muted">
-          Coordinators, dispatchers, couriers, linehaulers, node owners, and express reps all exist to
-          physically execute a task: load a linehaul, ride a route, verify a parcel is really there.
-          What they don't do is decide a parcel's status by hand. Every status you see is derived from
-          a logged event — a scan, a photo, a confirmed handoff — so the record reflects what actually
-          happened, not what someone remembered to update.
+          You always know where a parcel is — not because someone remembered to update a spreadsheet,
+          but because we track it live, end to end. If it says delivered, it's because delivery was
+          confirmed on the spot, not because someone marked a box.
         </p>
       </div>
       <div class="philosophy__card card">
-        <p class="mono philosophy__quote">"If it says delivered, it's because a courier logged proof — not because someone marked a box."</p>
+        <p class="mono philosophy__quote">"If it says delivered, it's because delivery was confirmed — not because someone marked a box."</p>
       </div>
     </div>
   </section>
 
   <section class="section">
-    <div class="container">
-      <div class="section-heading">
-        <span class="eyebrow">The Network</span>
-        <h2>Six roles, one shared record.</h2>
-      </div>
-      <div class="grid grid--3">
-        {roles.map((role) => {
-          const Icon = role.icon;
-          return (
-            <div class="feature-card">
-              <div class="feature-card__icon"><Icon size={22} /></div>
-              <h3>{role.title}</h3>
-              <p class="text-muted">{role.body}</p>
-            </div>
-          );
-        })}
-      </div>
+    <div class="container network-note">
+      <span class="eyebrow">The Network</span>
+      <h2>Built on local partnerships.</h2>
+      <p class="text-muted">
+        Underneath every delivery is a network of TODA associations and individual couriers who
+        already know these roads — we give them the routes, the visibility, and the extra
+        income to make delivering parcels worth the trip.
+      </p>
     </div>
   </section>
 
@@ -81,7 +56,7 @@ const provinces = ['Cavite', 'Batangas', 'Laguna', 'Rizal', 'Quezon'];
       <span class="eyebrow">Where We Operate</span>
       <h2>CALABARZON, and growing.</h2>
       <p class="text-muted coverage__lead">
-        Today our network covers all five CALABARZON provinces, reaching dozens of municipalities
+        Today, we aim to have our network cover all five CALABARZON provinces, reaching dozens of municipalities
         through a mix of hubs, terminals, and courier drop points.
       </p>
       <ul class="coverage__list">
@@ -125,34 +100,8 @@ const provinces = ['Cavite', 'Batangas', 'Laguna', 'Rizal', 'Quezon'];
     margin: 0;
   }
 
-  .section-heading {
+  .network-note {
     max-width: 60ch;
-    margin-bottom: 2.5rem;
-  }
-
-  .feature-card {
-    padding: 1.5rem;
-  }
-
-  .feature-card__icon {
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--radius-md);
-    background: rgba(251, 184, 7, 0.14);
-    color: var(--color-gold-dark);
-    margin-bottom: 1rem;
-  }
-
-  .feature-card h3 {
-    font-size: 1.1rem;
-  }
-
-  .feature-card p {
-    font-size: 0.95rem;
-    margin-bottom: 0;
   }
 
   .coverage {

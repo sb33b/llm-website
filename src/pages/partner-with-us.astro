@@ -1,76 +1,134 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/Button.astro';
+import HowItWorks from '../components/HowItWorks.astro';
 import Wallet from '../components/icons/Wallet.astro';
 import ShieldCheck from '../components/icons/ShieldCheck.astro';
 import Clock from '../components/icons/Clock.astro';
 import MapPin from '../components/icons/MapPin.astro';
 import CheckCircle from '../components/icons/CheckCircle.astro';
+import Eye from '../components/icons/Eye.astro';
+import Parcel from '../components/icons/Parcel.astro';
+import ArrowRight from '../components/icons/ArrowRight.astro';
 import { contactInfo } from '../data/contact-info';
 
-const benefits = [
+// --- For Express Companies (English) ---------------------------------------
+// Keep these three in sync with `whyPartner` on the home page (index.astro).
+// The "How it works" steps reuse the shared <HowItWorks /> component so they
+// stay identical to the home page's "Getting Started" section.
+const expressBenefits = [
   {
-    icon: Wallet,
-    title: 'Transparent pay',
-    body: 'Earn per delivery and per linehaul trip, itemized and logged against your account — no guessing what you’re owed.',
+    icon: Eye,
+    title: 'Live visibility',
+    body: "See your parcel's status the moment it changes — no calls, no chasing anyone for an update.",
   },
   {
-    icon: ShieldCheck,
-    title: 'A record you can check',
-    body: 'Every attempt, transfer, and payout is logged. Your work history is a clear record, not word of mouth.',
-  },
-  {
-    icon: Clock,
-    title: 'Fits your schedule',
-    body: 'Pasabay trips piggyback on runs you’re already making; special trips when the volume calls for it.',
+    icon: Parcel,
+    title: 'One manifest, one pickup',
+    body: 'Send us a manifest and we pick your parcels up from your nearest superhub. From there, it’s on us.',
   },
   {
     icon: MapPin,
-    title: 'Routes you already know',
-    body: 'You deliver in the barangays your TODA already covers — no unfamiliar territory.',
+    title: 'Reach past the end of the road',
+    body: 'Our TODA courier network gets parcels into barangays a standard fleet would otherwise have to write off.',
+  },
+];
+
+const expressMailSubject = encodeURIComponent('Express Company Partnership Inquiry');
+const expressMailBody = encodeURIComponent(
+  'Hi Last Last Mile team,\n\nWe’re an express/logistics company interested in partnering for last-mile delivery. Our details:\n\nCompany name:\nContact person:\nApprox. monthly parcel volume:\nDestination areas (provinces / municipalities):\n\n'
+);
+const expressMailtoHref = `mailto:${contactInfo.email.partners}?subject=${expressMailSubject}&body=${expressMailBody}`;
+
+// --- Para sa mga TODA at Courier (Tagalog) --------------------------------
+const benefits = [
+  {
+    icon: Wallet,
+    title: 'Dagdag-kita, walang hassle',
+    body: 'Kumita ng ekstra sa bawat parcel na maihahatid mo — sa mga ruta na dati mo nang dinadaanan.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Madali gamitin ang app',
+    body: 'Lahat ng kailangang makita at maitala ay nasa loob ng app.',
+  },
+  {
+    icon: Clock,
+    title: 'Bagay sa schedule mo',
+    body: 'Maghatid kung kailan mo kaya — kasabay lang ng ruta na dati mo nang dinadaanan.',
+  },
+  {
+    icon: MapPin,
+    title: 'Pamilyar na ruta lang',
+    body: 'Sa mga barangay na dati mo nang dinadaanan ka maghahatid — walang bagong lugar na kailangan pang matutunan.',
   },
 ];
 
 const eligibility = [
-  'Active membership with a TODA (or willingness to join one operating in your area)',
-  'Valid driver’s license',
-  'A tricycle in safe, working condition',
-  'A smartphone to log deliveries and attempts through the app',
+  'Aktibong miyembro ng isang TODA',
+  'May valid na driver’s license',
+  'Tricycle na maayos at ligtas gamitin',
+  'May smartphone para ma-log ang mga delivery sa app',
 ];
 
-const mailSubject = encodeURIComponent('Interested in partnering — TODA / Courier');
+const mailSubject = encodeURIComponent('Interesadong Mag-partner — TODA / Courier');
 const mailBody = encodeURIComponent(
-  'Hi Last Last Mile team,\n\nI’m interested in partnering as a courier / TODA. Here are my details:\n\nName:\nTODA (or barangay, if not yet affiliated):\nContact number:\n\n'
+  'Kumusta Last Last Mile team,\n\nInteresado akong mag-partner bilang courier / TODA. Narito ang aking mga detalye:\n\nPangalan:\nTODA (o barangay, kung wala pang TODA):\nContact number:\n\n'
 );
 const mailtoHref = `mailto:${contactInfo.email.partners}?subject=${mailSubject}&body=${mailBody}`;
 ---
 
 <BaseLayout
   title="Partner With Us"
-  description="Last Last Mile partners with TODA associations and individual tricycle couriers across CALABARZON — transparent pay, a logged record of every delivery, and routes you already know."
+  description="Nakikipag-partner ang Last Last Mile sa mga TODA at indibidwal na tricycle courier sa buong CALABARZON — dagdag-kita sa mga ruta na dati mo nang dinadaanan."
   path="/partner-with-us.html"
 >
   <section class="section partner-hero">
     <div class="container partner-hero__inner">
-      <span class="eyebrow">For TODAs & Couriers</span>
-      <h1>Turn your tricycle into a delivery route.</h1>
+      <span class="eyebrow">Partner With Us</span>
+      <h1>Two ways to partner with Last Last Mile.</h1>
       <p class="text-muted partner-hero__lead">
-        Last Last Mile works directly with TODA associations and individual tricycle couriers to carry
-        parcels the last stretch — into barangays a standard courier fleet can't reach. If your TODA
-        already rides these roads, you're already qualified to move parcels on them too.
+        We connect two sides of the last mile: express delivery companies that need parcels carried
+        into hard-to-reach barangays, and the TODAs and tricycle couriers who already ride those
+        roads. Choose the path that fits you.
       </p>
-      <Button href={mailtoHref} variant="primary">Email us to get started</Button>
     </div>
   </section>
 
   <section class="section section--surface">
     <div class="container">
-      <div class="section-heading">
-        <span class="eyebrow">Why Partner With Us</span>
-        <h2>What you get as a partner</h2>
+      <div class="audience-selector">
+        <a href="#for-express" class="audience-card">
+          <span class="audience-card__text">
+            <span class="audience-card__label">Express &amp; logistics companies</span>
+            <span class="audience-card__desc text-muted">Hand off the final leg into hard-to-reach barangays.</span>
+          </span>
+          <ArrowRight size={20} />
+        </a>
+        <a href="#for-toda-courier" class="audience-card">
+          <span class="audience-card__text">
+            <span class="audience-card__label">TODAs &amp; tricycle couriers</span>
+            <span class="audience-card__desc text-muted">Dagdag-kita sa mga ruta na dati mo nang dinadaanan.</span>
+          </span>
+          <ArrowRight size={20} />
+        </a>
       </div>
-      <div class="grid grid--4">
-        {benefits.map((item) => {
+    </div>
+  </section>
+
+  <section id="for-express" class="section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="eyebrow">For Express Companies</span>
+        <h2>Deliver past the end of the road.</h2>
+        <p class="text-muted">
+          If your fleet can get a parcel to a city, a hub, or a terminal but not into the barangay
+          itself, that last leg is what we do. Send us a manifest, we pick up from your superhub, and you track
+          every parcel to the doorstep.
+        </p>
+      </div>
+      <div class="grid grid--3">
+        {expressBenefits.map((item) => {
           const Icon = item.icon;
           return (
             <div class="feature-card">
@@ -81,39 +139,79 @@ const mailtoHref = `mailto:${contactInfo.email.partners}?subject=${mailSubject}&
           );
         })}
       </div>
+
+      <div class="how-express">
+        <h3 class="how-express__title">How it works</h3>
+        <HowItWorks />
+      </div>
+
+      <div class="express-cta">
+        <Button href={expressMailtoHref} variant="primary">Email us about a partnership</Button>
+      </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container eligibility">
-      <div>
-        <span class="eyebrow">Getting Started</span>
-        <h2>What you'll need</h2>
+  <section id="for-toda-courier" class="section section--surface">
+    <div class="container">
+      <div class="section-heading">
+        <span class="eyebrow">Para sa mga TODA at Courier</span>
+        <h2>Gawing dagdag-kita ang ruta mong dati nang dinadaanan.</h2>
         <p class="text-muted">
-          We keep the bar simple — if your TODA is already active in your area, you're most of the way
-          there.
+          Nakikipag-partner ang Last Last Mile sa mga TODA at indibidwal na tricycle courier para
+          maihatid ang mga parcel sa mga barangay na hindi kayang abutin ng regular na courier. Kung
+          dinadaanan na ng inyong TODA ang mga kalyeng ito, posibleng kwalipikado na kayong maghatid
+          ng parcel dito.
         </p>
+        <Button href={mailtoHref} variant="primary">I-email kami para magsimula</Button>
       </div>
-      <ul class="eligibility__list">
-        {eligibility.map((item) => (
-          <li>
-            <CheckCircle size={20} />
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
+
+      <div class="toda-block">
+        <span class="eyebrow">Bakit Kami Piliin</span>
+        <h3 class="toda-block__title">Ano ang makukuha mo bilang partner</h3>
+        <div class="grid grid--4">
+          {benefits.map((item) => {
+            const Icon = item.icon;
+            return (
+              <div class="feature-card">
+                <div class="feature-card__icon"><Icon size={24} /></div>
+                <h4>{item.title}</h4>
+                <p class="text-muted">{item.body}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div class="eligibility">
+        <div>
+          <span class="eyebrow">Para Makapagsimula</span>
+          <h3>Kailangan mo lang</h3>
+          <p class="text-muted">
+            Simple lang ang requirements — kung aktibo na ang TODA mo sa inyong lugar, halos handa ka
+            na.
+          </p>
+        </div>
+        <ul class="eligibility__list">
+          {eligibility.map((item) => (
+            <li>
+              <CheckCircle size={20} />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   </section>
 
   <section class="section section--dark">
     <div class="container partner-cta">
-      <h2>Ready to get started?</h2>
+      <h2>Handa ka na bang magsimula?</h2>
       <p class="text-muted partner-cta__lead">
-        Online registration is on the way. For now, email us your name, your TODA (or barangay, if
-        you're not yet affiliated with one), and a contact number — our team will reach out to walk you
-        through the next steps.
+        Malapit nang magkaroon ng online registration. Sa ngayon, i-email lang sa amin ang pangalan
+        mo, TODA mo (o barangay, kung wala ka pang TODA), at contact number — kokontakin ka ng aming
+        team para sa susunod na hakbang.
       </p>
-      <Button href={mailtoHref} variant="primary">Email {contactInfo.email.partners}</Button>
+      <Button href={mailtoHref} variant="primary">Mag-email sa {contactInfo.email.partners}</Button>
     </div>
   </section>
 </BaseLayout>
@@ -125,7 +223,7 @@ const mailtoHref = `mailto:${contactInfo.email.partners}?subject=${mailSubject}&
 
   .partner-hero__lead {
     font-size: 1.1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 0;
   }
 
   .section-heading {
@@ -133,6 +231,67 @@ const mailtoHref = `mailto:${contactInfo.email.partners}?subject=${mailSubject}&
     margin-bottom: 2.5rem;
   }
 
+  /* Anchored tracks must clear the sticky site header */
+  #for-express,
+  #for-toda-courier {
+    scroll-margin-top: 5rem;
+  }
+
+  /* Audience selector -------------------------------------------------- */
+  .audience-selector {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 720px) {
+    .audience-selector {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .audience-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    padding: 1.5rem 1.75rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+
+  .audience-card:hover,
+  .audience-card:focus-visible {
+    transform: translateY(-2px);
+    border-color: var(--color-gold);
+    box-shadow: var(--shadow-md);
+  }
+
+  .audience-card__text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .audience-card__label {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-charcoal);
+  }
+
+  .audience-card__desc {
+    font-size: 0.95rem;
+  }
+
+  .audience-card :global(svg) {
+    flex-shrink: 0;
+    color: var(--color-gold-dark);
+  }
+
+  /* Feature cards (shared by both tracks) ---------------------------- */
   .feature-card {
     padding: 1.5rem;
   }
@@ -149,7 +308,8 @@ const mailtoHref = `mailto:${contactInfo.email.partners}?subject=${mailSubject}&
     margin-bottom: 1rem;
   }
 
-  .feature-card h3 {
+  .feature-card h3,
+  .feature-card h4 {
     font-size: 1.1rem;
   }
 
@@ -158,10 +318,33 @@ const mailtoHref = `mailto:${contactInfo.email.partners}?subject=${mailSubject}&
     margin-bottom: 0;
   }
 
+  /* Express "how it works" ------------------------------------------- */
+  .how-express {
+    margin-top: 3rem;
+  }
+
+  .how-express__title {
+    margin-bottom: 1.5rem;
+  }
+
+  .express-cta {
+    margin-top: 3rem;
+  }
+
+  /* TODA / courier track ------------------------------------------- */
+  .toda-block {
+    margin-top: 3rem;
+  }
+
+  .toda-block__title {
+    margin-bottom: 1.5rem;
+  }
+
   .eligibility {
     display: grid;
     gap: 2.5rem;
     align-items: start;
+    margin-top: 3.5rem;
   }
 
   @media (min-width: 860px) {
@@ -184,7 +367,7 @@ const mailtoHref = `mailto:${contactInfo.email.partners}?subject=${mailSubject}&
     align-items: flex-start;
     gap: 0.75rem;
     padding: 1rem 1.25rem;
-    background: var(--color-surface);
+    background: var(--color-surface-alt);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
   }

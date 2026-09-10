@@ -3,16 +3,28 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/Button.astro';
 
 const steps = [
-  'Tap "Download for Android" below.',
-  'Since the app isn’t distributed through Google Play, your browser may warn you about installing from an unknown source — open Settings, find "Install unknown apps" for your browser, and allow it.',
-  'Open the downloaded file and tap Install.',
-  'Open Last Last Mile and sign in with the account your coordinator or our team provided.',
+  {
+    en: 'Tap "Download for Android" below.',
+    fil: 'I-tap ang "Download for Android" sa ibaba.',
+  },
+  {
+    en: 'Since the app isn’t distributed through Google Play, your browser may warn you about installing from an unknown source — open Settings, find "Install unknown apps" for your browser, and allow it.',
+    fil: 'Dahil wala ang app sa Google Play, maaaring mag-warning ang browser mo tungkol sa pag-install mula sa "unknown source" — buksan ang Settings, hanapin ang "Install unknown apps" para sa browser mo, at payagan ito.',
+  },
+  {
+    en: 'Open the downloaded file and tap Install.',
+    fil: 'Buksan ang na-download na file at i-tap ang Install.',
+  },
+  {
+    en: 'Open Last Last Mile and register for an account. Your registration needs to be approved by an admin before you can sign in.',
+    fil: 'Buksan ang Last Last Mile app at mag-register ng account. Kailangan munang aprubahan ng admin ang inyong registration bago kayo makapag-sign in.',
+  },
 ];
 ---
 
 <BaseLayout
   title="Download the App"
-  description="Download the Last Last Mile operations app for coordinators, dispatchers, couriers, linehaulers, node owners, and express company representatives."
+  description="Download the Last Last Mile operations app — for our partner team already working with us."
   path="/download.html"
 >
   <section class="section download-hero">
@@ -20,9 +32,8 @@ const steps = [
       <span class="eyebrow">For Partners</span>
       <h1>Get the Last Last Mile app.</h1>
       <p class="text-muted download-hero__lead">
-        This is the operations app for coordinators, dispatchers, couriers, linehaulers, node owners,
-        and express company representatives already working with us. If you're a partner, download and
-        sign in with the credentials our team provided.
+        This is the operations app for our partner team already working with Last Last Mile. If
+        you're a partner, download and register or sign in with credentials provided by our team.
       </p>
       <Button href="/download" variant="primary">Download for Android</Button>
       <p class="download-hero__meta text-muted mono">Android · v1.0.0 · not available on Google Play</p>
@@ -39,7 +50,10 @@ const steps = [
         {steps.map((step, i) => (
           <li>
             <span class="install__index">{i + 1}</span>
-            <span>{step}</span>
+            <span class="install__text">
+              <span class="install__en">{step.en}</span>
+              <span class="install__fil text-muted">{step.fil}</span>
+            </span>
           </li>
         ))}
       </ol>
@@ -50,8 +64,8 @@ const steps = [
     <div class="container not-a-partner">
       <h2>Not yet a partner?</h2>
       <p class="text-muted">
-        This app is built for people already working with Last Last Mile — TODA couriers, dispatchers,
-        node owners, and express company reps. Interested in joining the network?
+        This app is built for people already working with Last Last Mile. Interested in joining the
+        network?
       </p>
       <Button href="/partner-with-us.html" variant="secondary">See how to partner with us</Button>
     </div>
@@ -97,6 +111,17 @@ const steps = [
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
+  }
+
+  .install__text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .install__fil {
+    font-size: 0.9rem;
+    font-style: italic;
   }
 
   .install__index {

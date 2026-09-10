@@ -1,34 +1,28 @@
 ---
 import Parcel from './icons/Parcel.astro';
-import Route from './icons/Route.astro';
 import MapPin from './icons/MapPin.astro';
-import Tricycle from './icons/Tricycle.astro';
+import Eye from './icons/Eye.astro';
 
 const steps = [
   {
     icon: Parcel,
-    title: 'Manifest in',
-    body: 'Your express company hands off a manifest — one parcel or a full batch. Every piece is logged the moment it enters the network.',
-  },
-  {
-    icon: Route,
-    title: 'Linehaul out',
-    body: 'Parcels move between nodes on scheduled runs where it makes sense, or on a dedicated trip when volume calls for it.',
+    title: 'Send your manifest',
+    body: 'One parcel or a full batch — send us a manifest and we\'ll log it.',
   },
   {
     icon: MapPin,
-    title: 'Node handoff',
-    body: 'Parcels rest at a local hub or terminal until a courier is ready for the final leg — every handoff logged, not assumed.',
+    title: 'We pick up from your hub',
+    body: 'Last Last Mile will pick up parcels from your nearest superhub.',
   },
   {
-    icon: Tricycle,
-    title: 'Courier delivery',
-    body: 'A TODA-affiliated courier rides the last stretch by tricycle, into barangays larger couriers can’t reach — delivery confirmed on the spot.',
+    icon: Eye,
+    title: 'We deliver, you track it live',
+    body: 'You get live status visibility the whole way, without chasing anyone for updates.',
   },
 ];
 ---
 
-<ol class="how-it-works grid grid--4">
+<ol class="how-it-works grid grid--3">
   {steps.map((step, i) => {
     const Icon = step.icon;
     return (

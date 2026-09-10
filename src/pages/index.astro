@@ -4,31 +4,25 @@ import Button from '../components/Button.astro';
 import NetworkGraphic from '../components/NetworkGraphic.astro';
 import StatsStrip from '../components/StatsStrip.astro';
 import HowItWorks from '../components/HowItWorks.astro';
-import ShieldCheck from '../components/icons/ShieldCheck.astro';
-import Clock from '../components/icons/Clock.astro';
-import Wallet from '../components/icons/Wallet.astro';
+import Eye from '../components/icons/Eye.astro';
+import Parcel from '../components/icons/Parcel.astro';
 import MapPin from '../components/icons/MapPin.astro';
 
 const whyPartner = [
   {
-    icon: ShieldCheck,
-    title: 'Status you can trust',
-    body: "Every parcel's status is derived from real events, not a manual checkbox. If it says delivered, a courier logged proof on the spot.",
+    icon: Eye,
+    title: 'Live visibility',
+    body: "See your parcel's status the moment it changes — no calls, no chasing anyone for an update.",
   },
   {
-    icon: Clock,
-    title: 'SLA-monitored, every stage',
-    body: 'Manifests, linehauls, and deliveries are watched against service thresholds, so delays surface before they become disputes.',
-  },
-  {
-    icon: Wallet,
-    title: 'Transparent COD handling',
-    body: 'Cash-on-delivery is collected and remitted through GCash, Palawan Express, or cash — confirmed in two steps before it counts as settled.',
+    icon: Parcel,
+    title: 'One manifest, one pickup',
+    body: 'Send us a manifest and we pick your parcels up from your nearest superhub. From there, it’s on us.',
   },
   {
     icon: MapPin,
     title: 'Reach past the end of the road',
-    body: 'Our TODA network gets parcels into barangays a standard courier fleet would otherwise have to write off.',
+    body: 'Our TODA courier network gets parcels into barangays a standard fleet would otherwise have to write off.',
   },
 ];
 ---
@@ -42,10 +36,10 @@ const whyPartner = [
     <div class="container hero__grid">
       <div class="hero__copy">
         <span class="eyebrow">B2B Last-Mile Logistics</span>
-        <h1>Delivering past the end of the road.</h1>
+        <h1>Take your parcel to the LAST last mile.</h1>
         <p class="hero__lead text-muted">
           Last Last Mile partners with express delivery companies and local tricycle associations
-          (TODAs) to get parcels into barangays a standard courier network can't reach — with every
+          (TODAs) to get parcels into barangays a standard courier network struggles to reach — with every
           step logged, verified, and traceable from manifest to doorstep.
         </p>
         <div class="cluster">
@@ -68,8 +62,8 @@ const whyPartner = [
   <section class="section">
     <div class="container">
       <div class="section-heading">
-        <span class="eyebrow">How it works</span>
-        <h2>From manifest to doorstep, every step is logged.</h2>
+        <span class="eyebrow">Getting Started</span>
+        <h2>Three steps, one point of contact.</h2>
       </div>
       <HowItWorks />
     </div>
@@ -81,7 +75,7 @@ const whyPartner = [
         <span class="eyebrow">For Express Companies</span>
         <h2>Why partner with us</h2>
       </div>
-      <div class="grid grid--4">
+      <div class="grid grid--3">
         {whyPartner.map((item) => {
           const Icon = item.icon;
           return (
@@ -93,6 +87,9 @@ const whyPartner = [
           );
         })}
       </div>
+      <div class="express-cta">
+        <Button href="/partner-with-us.html#for-express" variant="primary">Partner with us</Button>
+      </div>
     </div>
   </section>
 
@@ -102,11 +99,10 @@ const whyPartner = [
         <span class="eyebrow">For TODAs & Couriers</span>
         <h2>Turn your tricycle into a delivery route.</h2>
         <p class="text-muted">
-          We work directly with TODA associations and individual couriers across CALABARZON — steady
-          per-delivery and per-trip pay, a transparent payout ledger, and routes that already run
-          through your barangay.
+          We work directly with TODA associations across CALABARZON — extra
+          income delivering parcels on routes you already ride, no unfamiliar territory.
         </p>
-        <Button href="/partner-with-us.html" variant="primary">Learn more</Button>
+        <Button href="/partner-with-us.html#for-toda-courier" variant="primary">Learn more</Button>
       </div>
     </div>
   </section>
@@ -136,7 +132,7 @@ const whyPartner = [
   }
 
   .section-heading {
-    max-width: 60ch;
+    max-width: 80ch;
     margin-bottom: 2.5rem;
   }
 
@@ -165,7 +161,11 @@ const whyPartner = [
     margin-bottom: 0;
   }
 
+  .express-cta {
+    margin-top: 2.5rem;
+  }
+
   .toda-cta__grid > div {
-    max-width: 60ch;
+    max-width: 80ch;
   }
 </style>

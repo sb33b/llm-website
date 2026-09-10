@@ -11,23 +11,23 @@
 // this one file.
 
 export const contactInfo = {
-  legalName: 'Last Last Mile',
-  tagline: 'Last-mile delivery, all the way to the last mile.',
+  legalName: 'Last Last Mile Logistics',
+  tagline: 'Take your parcel to the LAST last mile.',
 
   email: {
-    general: '[GENERAL_EMAIL@lastlastmile.example]',
-    partners: '[PARTNERS_EMAIL@lastlastmile.example]',
+    general: 'lastlastmile@gmail.com',
+    partners: 'lastlastmile@gmail.com',
   },
 
   phone: {
-    display: '[+63 9XX XXX XXXX]',
-    href: 'tel:+639XXXXXXXXX',
+    display: '+63 917-537-7999',
+    href: 'tel:+639175377999',
   },
 
   address: {
-    line1: '[Street address]',
-    line2: '[Barangay, City/Municipality]',
-    line3: '[Province, Philippines, ZIP]',
+    line1: '5876 Enriquez St.',
+    line2: 'Brgy. Poblacion, Makati',
+    line3: 'NCR, Philippines, 1210',
   },
 
   social: {
