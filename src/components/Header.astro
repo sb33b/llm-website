@@ -11,6 +11,9 @@ const navLinks = [
 ];
 
 const currentPath = Astro.url.pathname;
+
+// Express-company hub operators' metrics portal (separate app, llm-portal).
+const portalUrl = 'https://portal.lastlastmile.com';
 ---
 
 <header class="site-header">
@@ -26,10 +29,16 @@ const currentPath = Astro.url.pathname;
             <a href={link.href} aria-current={currentPath === link.href ? 'page' : undefined}>{link.label}</a>
           </li>
         ))}
+        <li class="site-header__nav-portal">
+          <a href={portalUrl}>Partner Login</a>
+        </li>
       </ul>
     </nav>
 
-    <a href="/download.html" class="btn btn--primary site-header__cta">Download App</a>
+    <div class="site-header__actions">
+      <a href={portalUrl} class="btn btn--secondary site-header__cta">Partner Login</a>
+      <a href="/download.html" class="btn btn--primary site-header__cta">Download App</a>
+    </div>
 
     <button type="button" class="site-header__toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav">
       <Menu class="icon-open" />
@@ -86,9 +95,20 @@ const currentPath = Astro.url.pathname;
     border-bottom-color: var(--color-gold);
   }
 
+  .site-header__actions {
+    display: flex;
+    gap: 0.6rem;
+  }
+
   .site-header__cta {
     padding: 0.6rem 1.4rem;
     font-size: 0.9rem;
+  }
+
+  /* Desktop shows Partner Login as a header button; the nav item is the
+     mobile-menu equivalent (header buttons are hidden below 860px). */
+  .site-header__nav-portal {
+    display: none;
   }
 
   .site-header__toggle {
@@ -115,6 +135,10 @@ const currentPath = Astro.url.pathname;
   @media (max-width: 860px) {
     .site-header__cta {
       display: none;
+    }
+
+    .site-header__nav-portal {
+      display: list-item;
     }
 
     .site-header__toggle {
