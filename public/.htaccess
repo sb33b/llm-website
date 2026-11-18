@@ -30,3 +30,8 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
   ExpiresByType text/css "access plus 1 week"
   ExpiresByType application/javascript "access plus 1 week"
 </IfModule>
+
+# Deploy marker written by scripts/deploy.sh; not for the public.
+<Files ".deployed-by">
+  Require all denied
+</Files>

@@ -16,3 +16,4 @@ npm-debug.log*
 # env
 .env
 .env.production
+.env.deploy

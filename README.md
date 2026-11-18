@@ -40,6 +40,43 @@ npm run preview   # serve the dist/ build locally, to sanity-check the final out
 
 ## Deploying to cPanel
 
+### Scripted deploy (`npm run deploy`)
+
+`scripts/deploy.sh` builds the site and mirrors `dist/` to the document root
+over SSH with rsync, so you don't upload through File Manager.
+
+One-time setup:
+1. In cPanel, open **SSH Access**, then **Manage SSH Keys**. Import your public
+   key (e.g. `~/.ssh/id_ed25519.pub`) and **Authorize** it. On Namecheap shared
+   hosting SSH listens on port **21098**.
+2. `cp .env.deploy.example .env.deploy` and fill in the host, cPanel username
+   and `DEPLOY_PATH` (`public_html`). `.env.deploy` is gitignored.
+3. `npm run deploy -- --dry-run`: this builds and lists exactly what would be
+   uploaded and deleted, without changing anything. Check it before the first
+   real deploy.
+
+Each release:
+```sh
+npm run deploy            # npm run build, preview, confirm [y/N], upload
+```
+Options: `--dry-run` (preview only), `--skip-build` (reuse the current
+`dist/`), `--yes` (skip the prompt).
+
+How it stays safe:
+- It mirrors exactly: files on the server that aren't in the new build are
+  deleted. These are always kept: `.well-known`, `cgi-bin`, `.user.ini`,
+  `php.ini` and `error_log`. Add more paths with `DEPLOY_PROTECT` in
+  `.env.deploy`.
+- It refuses to run if the remote folder doesn't exist, or if `DEPLOY_PATH`
+  is `/`, the home directory, or contains `..`.
+- Each deploy writes a `.deployed-by` marker (site name, commit, time). If the
+  target folder was last deployed by the *other* site, it refuses to run. That
+  catches swapped `DEPLOY_PATH`s before anything is deleted.
+- Files are compared by checksum, so a rebuilt file of the same size is never
+  skipped.
+
+### Manual deploy (fallback)
+
 1. `npm run build`
 2. Open cPanel → **File Manager** (or connect via FTP/SFTP) and go to
    `public_html/` (or the subdomain's document root, if this site lives on a
